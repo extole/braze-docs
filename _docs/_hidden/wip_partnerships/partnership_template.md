@@ -1,5 +1,5 @@
 ---
-nav_title: Your Partner Page
+nav_title: Elza's Partner Page
 article_title: Your Partner Page
 page_order: 1
 
