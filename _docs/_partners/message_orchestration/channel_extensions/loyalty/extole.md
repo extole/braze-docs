@@ -27,65 +27,39 @@ With the Braze and Extole integration, you can pull customer events and attribut
 
 ## Use cases
 
-The following use cases showcase a few ways you can leverage Extole's integration with Braze. Work with your Extole implementation and customer success managers to develop an option that fits your company's specific needs.
-- Turn every customer into an advocate by including their unique share link in Braze communications.
-- Continue the conversation with site visitors by triggering a personalized welcome campaign when they opt-in to receive marketing communications in Extole-powered programs.
-- Promote further engagement by triggering a product recommendations campaign when an advocate shares a specific product with a friend.
-- Thank advocates for bringing you new, high-quality customers by triggering a "surprise and delight" campaign when they have driven five or more referrals.
-- Trigger a refer-a-friend email, push, or SMS campaign during any moment of customer delight, such as a purchase or positive experience with your brand.
+The following use cases showcase a few ways you can leverage Extole’s integration with Braze. Work with your Extole implementation and customer success managers to develop an option that fits your company’s specific needs.
+
+- Leverage custom events from your referral and engagement programs to trigger a Braze campaign or Canvas
+- Power custom dashboards and reporting using data from your Extole-powered programs
+- Automatically unsubscribe or subscribe users to your marketing list in Braze
 
 ## Integration
 
 Complete the following steps to get your integration up and running quickly. Your Extole implementation and customer success managers will support you through this process.
 
-### Step 1: Define event names and attributes 
+### Step 1: Connect Your Extole and Braze Accounts 
 
-Any event that Extole tracks can be sent to Braze. Work with your Extole implementation or client success manager to identify the event names and user attributes you’d like to send into Braze or select from the default options in the tables below. Your Extole implementation or client success manager will then map and configure the event names in the Extole dashboard.
+1. Log in to your Extole account.
+2. Select the Braze integration in the [Partners][2] center of your My Extole account.
+3. Within the Braze integration, hit the Connect button to initiate the connection between Extole and Braze.
+4. Provide your Braze REST API key and URL as well as the events that you want to send from Extole to Braze
+5. Complete the connection by saving your settings. Once this is done, Extole events will be able to flow into your Braze account.
 
-#### Event names
+### Step 2: Define Event Names and Attributes
+Any event that Extole tracks can be sent to Braze. Please work with your implementation or client success manager to identify the event names and user attributes you’d like Extole to send into Braze, or select from the default options in the tables below. Your Extole implementation or client success manager will then map and configure the event names in the Extole dashboard for you.
 
-| Event name | Description |
+| Event Name | Attributes |
 | ----------- | ----------- |
-| Created Share Link | A share link is created for a customer. |
-| Shared | A customer sends a link to their friend(s) via email, SMS, or social channel. |
-| Referred Signed Up | A referred customer signs up via email or SMS through the program. |
-| Referred Converted | A referred customer completes a purchase. Note that outcome events can be customized for your business.|
-| Subscribed | A customer subscribes via email or SMS. |
-| Unsubscribed | A customer unsubscribes via email or SMS. |
-| Earned Reward | A customer earns a reward. |
+| Created Share Link | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
+| Shared | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
+| Referred Signed Up | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
+| Referred Converted | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event|
+| Subscribed | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
+| Unsubscribed | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
+| Earned Reward | `external_id` (required) - The unique identifier for the customer, such as a user ID.<br>`email`<br>`phone_number`<br>`share_link`<br> `first_name`<br>`last_name`<br>`funnel` - The correct funnel type for the customer (e.g., `advocate` or `friend`)<br>`data` - Any additional data associated with the event |
 {: .reset-td-br-1 .reset-td-br-2}
 
-#### Attribute names
-
-| Attribute name | Description | Example | 
-| -------------- | ----- | ------- |
-| `external_id` (required) | The unique identifier for the customer, such as a user ID. | User ID |
-| `email` | The customer's email address. | jsmith@yourcompany.com |
-| `phone_number` | The customer's phone number, including country code. | +15555555555 |
-| `share_link` | The customer’s personal share link. | refer.yourcompany.com/jsmith |
-| `first_name` | The customer's first name. | John |
-| `last_name` | The customer's last name. | Smith |
-| `city` | The customer's city, spelled out. | Boston |
-| `state` | The customer's state, abbreviated. | MA |
-| `country` | The customer's country, abbreviated. | US |
-| `funnel` | The correct funnel type for the customer. | friend or advocate |
-{: .reset-td-br-1 .reset-td-br-2 .reset-td-br-3}
-
-### Step 2: Connect to your Braze account 
-
-To start sending data from your Extole programs into Braze, create a new webhook integration in Extole’s outbound webhook center.
-
-1. Navigate to Tech Center > Outbound Webhooks in your My Extole account and click on the + New Integration button.
-2. Enter a Key Name (i.e., how you'd like to refer to the key in Extole) and select “Webhook” as the Key Type. 
-3. In the Partner Key ID field, add a value that you will recognize for this credential (e.g., your account ID, email address, or user ID).
-4. Select "PASSWORD" from the Algorithm drop down.
-5. Add your Braze REST API key to the Key field and click “Create Key.”
-
-<br><br>![][4]{: style="max-width:80%;"}
-
-Next, work with your Extole success or implementation manager to create a new webhook. They will configure the webhook for you using your newly generated key and Braze instance URL.<br><br>![][5]{: style="max-width:80%;"}
-
-## Customization
+## Customization 
 
 ### Configure a staging API key for testing
 
@@ -93,19 +67,18 @@ If you only provide one Braze REST API key to Extole, only production events wil
 
 ### Creating a new user alias
 
-For certain use cases, such as a new email or SMS subscription where Extole does not have an external ID (user ID) for the user, Extole can check for the user's identifier using Braze's [export user by identifier endpoint][2]. If the user exists within Braze, Extole will add and update any profile attributes. If the request does not return a user profile, Extole will instead use the [user track endpoint][3] to create a user alias with the user's email address as the alias name.
+For certain use cases, such as a new email or SMS subscription where Extole does not have an external ID (user ID) for the user, Extole can check for the user's identifier using Braze's [export user by identifier endpoint][3]. If the user exists within Braze, Extole will add and update any profile attributes. If the request does not return a user profile, Extole will instead use the [user track endpoint][4] to create a user alias with the user's email address as the alias name.
 
 ## Using this integration
 
 After connecting your Braze account to the Extole dashboard, events will automatically begin flowing from Extole to Braze. A live view of events being sent to Braze can be found in Extole’s outbound webhook center for troubleshooting. 
 
-![][6]
+![][5]
 
 Once the events and attributes you have configured are flowing into Braze, you can use the data to generate Braze audiences and campaign segmentation.
 
 [1]: https://www.extole.com
-[2]: {{site.baseurl}}/api/endpoints/export/user_data/post_users_identifier/
-[3]: {{site.baseurl}}/api/endpoints/user_data/post_user_track/#request-body
-[4]: {% image_buster /assets/img/extole/extole-outbound-webhooks.png %}
-[5]: {% image_buster /assets/img/extole/extole-add-new-webhook.png %}
-[6]: {% image_buster /assets/img/extole/extole-webhook-live-events.png %}
+[2]: https://my.extole.com/partners
+[3]: {{site.baseurl}}/api/endpoints/export/user_data/post_users_identifier/
+[4]: {{site.baseurl}}/api/endpoints/user_data/post_user_track/#request-body
+[5]: {% image_buster /assets/img/extole/extole-webhook-live-events.png %}
